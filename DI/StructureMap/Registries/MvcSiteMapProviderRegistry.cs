@@ -52,6 +52,7 @@ namespace MvcTestApplication.DI.StructureMap.Registries
 // Example:
 // typeof(SiteMap),
 // typeof(SiteMapNodeVisibilityProviderStrategy)
+                typeof(IMvcContextFactory)
             };
             var multipleImplementationTypes = new Type[] {
                 typeof(ISiteMapNodeUrlResolver),
@@ -119,7 +120,9 @@ namespace MvcTestApplication.DI.StructureMap.Registries
 // Configure the visitors
             this.For<ISiteMapNodeVisitor>()
                 .Use<UrlResolvingSiteMapNodeVisitor>();
-
+            
+            //this.For<IMvcContextFactory>().Use<MvcContextFactory>();
+            this.For<IMvcContextFactory>().Use<MvcTestApplication.DI.MVCSiteMapFixes.MvcContextFactory>();
 
 // Prepare for our node providers
             /*var xmlSource = this.For<IXmlSource>().Use<FileXmlSource>()
